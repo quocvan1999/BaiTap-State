@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "../css/content.css";
 
 const Content = () => {
@@ -67,31 +68,48 @@ const Content = () => {
     },
   ];
 
+  const defaultProduct = {
+    id: 1,
+    price: 30,
+    name: "GUCCI G8850U",
+    url: "../../../src/assets/img/v1.png",
+    desc: "Light pink square lenses define these sunglasses, ending with amother of pearl effect tip. ",
+  };
+
+  const [product, setProduct] = useState(defaultProduct);
+
+  const handleChangeProduct = (glasse) => {
+    setProduct(glasse);
+  };
+
   return (
     <div className="content">
       <div className="item-model">
         <div className="glasses-model">
           <div className="image-glasses">
             <img
-              src="../../../src/assets/img/v7.png"
+              src={product.url}
               alt="img
             "
             />
           </div>
           <div className="item-content">
-            <h1 className="title">Name product</h1>
-            <p className="description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              consectetur libero non arcu semper, vel pulvinar nunc tincidunt.
-            </p>
+            <h1 className="title">{product.name}</h1>
+            <p className="description">{product.desc}</p>
           </div>
         </div>
       </div>
       <div className="container-glasses">
         {glasses.map((glasse, index) => {
           return (
-            <a className="glasses-item">
-              <img src="../../../src/assets/img/v1.png" alt="img" />
+            <a
+              onClick={() => {
+                handleChangeProduct(glasse);
+              }}
+              className="glasses-item"
+              key={index}
+            >
+              <img src={glasse.url} alt="img" />
             </a>
           );
         })}
